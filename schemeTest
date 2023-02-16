@@ -1,0 +1,14 @@
+linear
+upwind
+linearUpwind grad(T)
+QUICK
+limitedLinear 0.2
+limitedLinear 1.0
+vanLeer
+midPoint
+Minmod
+MUSCL
+LUST grad(T)
+SFCD
+SuperBee
+UMIST
