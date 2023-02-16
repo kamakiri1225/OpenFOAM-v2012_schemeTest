@@ -4,7 +4,6 @@ import subprocess
 import numpy as np
 from PyFoam.RunDictionary.ParsedParameterFile import ParsedParameterFile
 import matplotlib.pyplot as plt
-import pandas as pd
 import os
 
 # スキームファイルを読み込む
@@ -71,12 +70,13 @@ def graph(scheme, newCase, resultDir):
     # グラフを保存
     plt.savefig(f'{result_graph_dir}/{scheme}.png')
     plt.close()
-    
+
+# 全部のグラフを2列ずつにしてまとめる
 def Allgraph_png(scheme_list):
-    fig = plt.figure(figsize = (12,20))
+    fig = plt.figure(figsize = (12,24))
     for i, scheme in enumerate(scheme_list):
          #グラフを表示する領域を，figオブジェクトとして作成．
-        col = len(scheme_list)//2 + 1
+        col = len(scheme_list)//2 + 1 
         ax1 = fig.add_subplot(col,2,i+1)
         time_list = os.listdir(f'./resultDir/orgCase_{i}/postProcessing/samples')
 
@@ -85,7 +85,7 @@ def Allgraph_png(scheme_list):
             ax1.plot(temp_data[0], temp_data[1],label=f'time = {time}')
             ax1.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0, fontsize=8)  
 
-        plt.subplots_adjust(wspace=0.8, hspace=0.6)
+        plt.subplots_adjust(wspace=0.8, hspace=0.8)
         ax1.grid()
         ax1.set_yticks(np.arange(-0.5,2,0.25))
         ax1.set_xlabel("X(m)", fontsize=12)
@@ -98,9 +98,9 @@ def Allgraph_png(scheme_list):
     plt.close()
 
 
+#================== main ========================
 orgCase = 'orgCase'
 resultDir = 'resultDir'
-
 
 # スキームのリスト
 scheme_list = open_SchemeList()
@@ -110,7 +110,9 @@ print(f'スキームの数 : {len(scheme_list)}')
 for i, scheme in enumerate(scheme_list):
     print(f'{i+1} ======== {scheme} =========')
     newCase = clone_file(orgCase, resultDir)   # 関数を実行する
-    new_parameter(scheme, newCase)              # スキームを入れ替える
+    new_parameter(scheme, newCase)             # スキームを入れ替える
     Allrun(newCase)                            # 計算を実行
-    graph(scheme, newCase, resultDir)           # グラフ化
+    graph(scheme, newCase, resultDir)          # グラフ化
     
+# 全てのグラフをまとめる
+Allgraph_png(scheme_list)
