@@ -10,45 +10,7 @@ $$\frac{\partial T}{\partial t}+u\frac{\partial T}{\partial x}=0$$
 2. [【OpenFOAM】移流方程式で色々な離散化スキーム(解の振る舞いと計算時間)](https://takun-physics.net/15492/)
 
 ## アニメーション作成用のプログラム
-~~~python
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
+```python
 from matplotlib.animation import ArtistAnimation
 # 全部のグラフを2列ずつにしてまとめる
 def AllAnimation(scheme_list, ExecutionTime_list):
@@ -87,4 +49,4 @@ def AllAnimation(scheme_list, ExecutionTime_list):
  
 # ========== main  ==========
 AllAnimation(scheme_list, ExecutionTime_list)
-~~~
+```
