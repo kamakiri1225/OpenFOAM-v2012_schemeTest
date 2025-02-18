@@ -50,3 +50,7 @@ def AllAnimation(scheme_list, ExecutionTime_list):
 # ========== main  ==========
 AllAnimation(scheme_list, ExecutionTime_list)
 ```
+
+# ブレンドスキーム
+領域ごとにスキームを変える機能(OpenFOAM v2412より追加)
+![linearUpwind_upwind](https://github.com/user-attachments/assets/3145a6fd-41f6-4991-aa51-ad634f88321c)
