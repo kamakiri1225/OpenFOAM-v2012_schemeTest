@@ -1,0 +1,67 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+    {
+        name    linearUpwindFaceSet;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        box     (0 -100 -100)(0.5 100 100);
+    }
+    {
+        name    linearUpwindCellSet;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        box     (0 -100 -100)(0.3 100 100);
+    }
+    {
+        name        linearUpwindFaceZone;
+        type        faceZoneSet;
+        action      new;
+        source      setsToFaceZone;
+        faceSet     linearUpwindFaceSet;
+        cellSet     linearUpwindCellSet;
+    }
+
+    {
+        name    upwindFaceSet;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        box     (0.5 -100 -100)(100 100 100);
+    }
+    {
+        name    upwindCellSet;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        box     (0.3 -100 -100)(100 100 100);
+    }
+    {
+        name    upwindFaceZoneSet;
+        type    faceZoneSet;
+        action  new;
+        source  setsToFaceZone;
+        faceSet upwindFaceSet;
+        cellSet upwindCellSet;
+    }
+);
+
+
+// ************************************************************************* //
